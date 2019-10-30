@@ -2,6 +2,8 @@
 
 namespace core\form;
 
+use core\MVC\imprimir;
+
 /**
  * Clase para validar los campos de un formulario
  */
@@ -21,6 +23,16 @@ class Input {
      * @return boolean
      */
     static function check($fields, $on = false) {
+        imprimir::frase("entra en check");
+        $chekeado=true;
+        foreach ($fields as $valor){
+            if($on[$valor]==null){
+                $chekeado==false;
+            }
+        }
+        imprimir::imprime("check",$chekeado);
+        return $chekeado;
+
     }
 
 
@@ -31,6 +43,7 @@ class Input {
      * @return string
      */
     static function str($value) {
+
     }
 
     /**
@@ -40,6 +53,7 @@ class Input {
      * @return boolean
      */
     static function checkImage($path) {
+        
     }
 
 }

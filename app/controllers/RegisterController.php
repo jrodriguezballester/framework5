@@ -5,6 +5,7 @@ use core\MVC\Controller as Controller;
 use app\models\UserModel;
 use core\form\Input;
 use core\auth\Auth;
+use core\MVC\imprimir;
 
 /**
  * Clase para el registro de nuevos usuarios
@@ -26,6 +27,8 @@ class RegisterController extends Controller {
         $userName = input::str($_POST['user']);
         $password = auth::crypt(input::str($_POST['password']));
         if (input::check(['user', 'password'], $_POST)) {
+            imprimir::resalta("verdadero");
+            imprimir::imprime("dass",$userName);
             $idUser = $this->createUser($userName, $password);
             if ($idUser>0) {
                 $this->uploadAvatar($_FILES['avatar']['name'], $_FILES["avatar"]["tmp_name"], $idUser);

@@ -30,7 +30,7 @@ class Auth {
 
     /**
      * Comprueba si el usuario está logeado
-     *
+     *si el idsesion cookie 
      * @return boolean
      */
     static function check() {

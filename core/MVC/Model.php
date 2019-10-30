@@ -271,10 +271,13 @@ abstract class Model { //implements \ArrayAccess{
      * @return void
      */
     public function save(){
-        $paramas = array();
+        imprimir::frase("entra en save");
+        $params = array();
+        imprimir::imprime("params",$params);
+
         if ($this->exists) {
-            //var_dump();
             $attr = array_diff($this->attributes, $this->originals);
+            imprimir::imprime("attr",$attr);
             if (!empty($attr)) {
                 foreach ($attr as $key => $value) {
                     $params[$key] = $value;    
@@ -284,6 +287,7 @@ abstract class Model { //implements \ArrayAccess{
                     ->update($params);
             }
         } else {
+            imprimir::imprime("attributes",$this->attributes);
             foreach ($this->attributes as $key => $value) {
                 $params[$key] = $value;    
             }
