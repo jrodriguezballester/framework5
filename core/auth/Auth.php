@@ -14,6 +14,7 @@ class Auth {
      * @return string
      */
     static function crypt($password) {
+        return password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
     }
 
     /**
@@ -24,6 +25,7 @@ class Auth {
      * @return boolean
      */
     static function passwordVerify($password, $idUser) {
+        return password_verify($password, $idUser); //
     }
 
     /**
@@ -32,6 +34,7 @@ class Auth {
      * @return boolean
      */
     static function check() {
+        
     }
 
 }

@@ -2,7 +2,7 @@
 
 return array(
     "site" => array(
-        "root" => "http://localhost:8080/DWS/framework/4",
+        "root" => "http://localhost/DWS/login",
     ),
     "DB" => array(
         "CONNECTION" => "mysql",

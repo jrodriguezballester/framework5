@@ -1,6 +1,6 @@
 <?php
 
-$subdomain = 'DWS/framework/4';
+$subdomain = 'DWS/login';
 
 return array(	
 	"routes" => array(
