@@ -1,7 +1,7 @@
 <?php
 namespace core\auth;
 use app\models\UserModel;
-
+use core\MVC\imprimir;
 /**
  * Clase para validar usuarios
  */
@@ -14,6 +14,7 @@ class Auth {
      * @return string
      */
     static function crypt($password) {
+        imprimir::resalta("entra en encryptar");
         return password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
     }
 

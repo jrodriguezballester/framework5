@@ -2,7 +2,7 @@
 
 return array(
     "site" => array(
-        "root" => "http://localhost/DWS/login",
+        "root" => "http://localhost/DWS/framework5",
     ),
     "DB" => array(
         // $this->bbdd = new PDO("$connection:dbname=$dbname;host=$host:$port", "$username", "$password");

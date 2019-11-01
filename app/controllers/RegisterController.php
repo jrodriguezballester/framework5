@@ -24,11 +24,19 @@ class RegisterController extends Controller {
      * @return boolean
      */
     public function RegisterAction() {
+        // imprimir::frase("entra en RegisterAction");
+        // imprimir::imprime("user:",$_POST['user']);
+        // imprimir::imprime("pass:",$_POST['password']);
+
         $userName = input::str($_POST['user']);
-        $password = auth::crypt(input::str($_POST['password']));
+        $password = auth::crypt($_POST['password']);
+
+        imprimir::imprime("username:",$userName);
+        imprimir::imprime("pass:",$password);
+
         if (input::check(['user', 'password'], $_POST)) {
             imprimir::resalta("verdadero");
-            imprimir::imprime("dass",$userName);
+           
             $idUser = $this->createUser($userName, $password);
             if ($idUser>0) {
                 $this->uploadAvatar($_FILES['avatar']['name'], $_FILES["avatar"]["tmp_name"], $idUser);
@@ -47,14 +55,16 @@ class RegisterController extends Controller {
      * @return int
      */
     private function createUser($userName, $password) {
+        imprimir::frase("crea el usuario");
         $user = new UserModel();
         $userNameField = $user->getUserNameField(); 
         $passwordField = $user->getPasswordField(); 
         $user->$userNameField = $userName;
         $user->$passwordField = $password;
-        if ($user->save()) 
+        if ($user->save()) {
+        imprimir::frase("lo ha save__ado");
             return $user->lastInsertId();
-            else return -1;
+          }  else return -1;
     }
 
     /**

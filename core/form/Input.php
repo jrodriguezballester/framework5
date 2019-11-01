@@ -24,15 +24,19 @@ class Input {
      */
     static function check($fields, $on = false) {
         imprimir::frase("entra en check");
+   //     imprimir::imprime("field",$fields);
+   //     imprimir::imprime("on",$on);
         $chekeado=true;
-        foreach ($fields as $valor){
-            if($on[$valor]==null){
+        foreach ($fields as $key){
+   //         imprimir::linea("field:",$key);
+   //         imprimir::linea("on:",$on[$key]);
+           
+            if($on[$key]==null){
                 $chekeado==false;
             }
         }
-        imprimir::imprime("check",$chekeado);
+        imprimir::linea("Valor del check:",$chekeado);
         return $chekeado;
-
     }
 
 
@@ -43,7 +47,8 @@ class Input {
      * @return string
      */
     static function str($value) {
-
+        imprimir::frase("Sanitiza String");
+     return $newstr = filter_var($value, FILTER_SANITIZE_STRING);
     }
 
     /**

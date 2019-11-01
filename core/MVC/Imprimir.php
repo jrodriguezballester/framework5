@@ -18,9 +18,7 @@ public static function imprime($string,$var)
 {
     echo "<br>$string <pre>";
         print_r($var);
-        echo "</pre>";
-    
-    echo "<br> ";
+        echo "</pre><br> ";
 } 
 public static function frase($string)
 {
@@ -29,5 +27,9 @@ public static function frase($string)
 public static function resalta($string)
 {
     echo "<br><h2>$string</h2><br>";
+}
+public static function linea($string,$var)
+{
+    echo "$string: $var <br>";
 }
 }  

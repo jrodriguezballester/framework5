@@ -276,6 +276,7 @@ abstract class Model { //implements \ArrayAccess{
         imprimir::imprime("params",$params);
 
         if ($this->exists) {
+            imprimir::frase("ya existe ");
             $attr = array_diff($this->attributes, $this->originals);
             imprimir::imprime("attr",$attr);
             if (!empty($attr)) {
@@ -287,10 +288,12 @@ abstract class Model { //implements \ArrayAccess{
                     ->update($params);
             }
         } else {
-            imprimir::imprime("attributes",$this->attributes);
+            imprimir::frase("no existe");
+            imprimir::imprime("attributes:",$this->attributes);
             foreach ($this->attributes as $key => $value) {
                 $params[$key] = $value;    
             }
+            imprimir::imprime("params:",$this->$params);
             return DB::table($this->getTable())->insert($params);
         }
     }
