@@ -25,20 +25,16 @@ class RegisterController extends Controller {
      */
     public function RegisterAction() {
         // imprimir::frase("entra en RegisterAction");
-        // imprimir::imprime("user:",$_POST['user']);
-        // imprimir::imprime("pass:",$_POST['password']);
-
+        
         $userName = input::str($_POST['user']);
         $password = auth::crypt($_POST['password']);
 
-        imprimir::imprime("username:",$userName);
-        imprimir::imprime("pass:",$password);
-
+        
         if (input::check(['user', 'password'], $_POST)) {
-            imprimir::resalta("verdadero");
-           
+                  
             $idUser = $this->createUser($userName, $password);
-            if ($idUser>0) {
+            imprimir::linea("idUser",$idUser);
+            if ($idUser>0) {              
                 $this->uploadAvatar($_FILES['avatar']['name'], $_FILES["avatar"]["tmp_name"], $idUser);
                 header('Location: '.$GLOBALS['config']['site']['root'].$this->redirect_to);
             } else echo 'ALGO HA FALLADO';
@@ -75,8 +71,9 @@ class RegisterController extends Controller {
      * @return boolean
      */
     private function uploadAvatar($fileName, $tmpFileName, $idUser) {
+        //viene de registerAction RegisterControler 43
         if (input::checkImage($fileName)) {
-            $avatar = 'avatar'.$idUser.'.'.pathinfo($fileName)['extension'];
+            $avatar = 'avatar'.$idUser.'.'.pathinfo($fileName)['extension'];      
             $path = $GLOBALS['basedir'].ds.'public'.ds.'images'.ds.'avatares'.ds.$avatar;
             if (move_uploaded_file($tmpFileName, $path))
                 return true;

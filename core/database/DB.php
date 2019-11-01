@@ -3,6 +3,7 @@
 namespace core\database;
 
 use \core\database\PdoConnection AS PdoConnection;
+use core\MVC\imprimir;
 
 class DB {
 
@@ -106,7 +107,8 @@ class DB {
     }
 
     public function insert($record) {
-        $sql ='INSERT INTO '.$this->getTable().'(';
+        imprimir::frase("entra Insert");
+        $sql ='INSERT INTO '.$this->getTable().' (';
         $values = '';
         foreach ($record as $key => $value) {
             $sql.=$key.',';
@@ -116,6 +118,7 @@ class DB {
         $sql = substr($sql, 0, -1).')';
         $sql.=' VALUES ('.substr($values, 0, -1).')';
         $connection = PdoConnection::getInstance();
+        imprimir::linea("SQL: ",$sql);
         return $connection->insert($sql, $params);
     }
 

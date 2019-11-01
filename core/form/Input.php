@@ -7,12 +7,13 @@ use core\MVC\imprimir;
 /**
  * Clase para validar los campos de un formulario
  */
-class Input {
-    
+class Input
+{
+
     /**
      * Archivos de imagen permitidos
      */
-    static $whiteList = array ('jpg', 'png', 'bmp');
+    static $whiteList = array('jpg', 'png', 'bmp');
 
 
     /**
@@ -22,20 +23,21 @@ class Input {
      * @param boolean $on
      * @return boolean
      */
-    static function check($fields, $on = false) {
+    static function check($fields, $on = false)
+    {
         imprimir::frase("entra en check");
-   //     imprimir::imprime("field",$fields);
-   //     imprimir::imprime("on",$on);
-        $chekeado=true;
-        foreach ($fields as $key){
-   //         imprimir::linea("field:",$key);
-   //         imprimir::linea("on:",$on[$key]);
-           
-            if($on[$key]==null){
-                $chekeado==false;
+        //     imprimir::imprime("field",$fields);
+        //     imprimir::imprime("on",$on);
+        $chekeado = true;
+        foreach ($fields as $key) {
+            //         imprimir::linea("field:",$key);
+            //         imprimir::linea("on:",$on[$key]);
+
+            if ($on[$key] == null) {
+                $chekeado == false;
             }
         }
-        imprimir::linea("Valor del check:",$chekeado);
+        imprimir::linea("Valor del check:", $chekeado);
         return $chekeado;
     }
 
@@ -46,9 +48,10 @@ class Input {
      * @param string $value
      * @return string
      */
-    static function str($value) {
+    static function str($value)
+    {
         imprimir::frase("Sanitiza String");
-     return $newstr = filter_var($value, FILTER_SANITIZE_STRING);
+        return $newstr = filter_var($value, FILTER_SANITIZE_STRING);
     }
 
     /**
@@ -57,8 +60,21 @@ class Input {
      * @param [type] $path
      * @return boolean
      */
-    static function checkImage($path) {
-        
-    }
+    static function checkImage($path)
+    {
+        imprimir::frase("chekeando........");
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case "jpg":
 
+            case "bmp":
+            case "png":              
+                imprimir::frase("extension chequeada true");
+                return true;
+                break;
+            default:
+            imprimir::frase("extension chequeada false");
+                return false;
+        }
+    }
 }

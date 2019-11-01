@@ -293,7 +293,7 @@ abstract class Model { //implements \ArrayAccess{
             foreach ($this->attributes as $key => $value) {
                 $params[$key] = $value;    
             }
-            imprimir::imprime("params:",$this->$params);
+            imprimir::imprime("params:",$this->params);
             return DB::table($this->getTable())->insert($params);
         }
     }
@@ -304,6 +304,7 @@ abstract class Model { //implements \ArrayAccess{
      * @return int
      */
     public function lastInsertId() {
+        imprimir::frase("entra en lastID");
         return DB::table($this->getTable())->lastInsertId();
     }
 

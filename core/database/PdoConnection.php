@@ -2,11 +2,14 @@
 
 namespace core\database;
 
+use core\MVC\imprimir;
 use PDO;
 use PDOException;
 
 /* clase para conectar con nuestra bbdd */
-class PdoConnection {
+
+class PdoConnection
+{
 
     /**
      * Instancia de la clase
@@ -25,7 +28,8 @@ class PdoConnection {
      * Constructor de la clase donde hacemos la conexión con nuestra bbdd
      * Los parámetros los leemos de la variable $config
      */
-    private function __construct(){
+    private function __construct()
+    {
         $dbConfig = $GLOBALS['config']['DB'];
         $connection = $dbConfig['CONNECTION'];
         $dbname = $dbConfig['NAME'];
@@ -49,11 +53,12 @@ class PdoConnection {
      *
      * @return void
      */
-    public static function getInstance() {
-		if(self::$instance == null) {
-			self::$instance = new PDOConnection();
-		}
-		return self::$instance;
+    public static function getInstance()
+    {
+        if (self::$instance == null) {
+            self::$instance = new PDOConnection();
+        }
+        return self::$instance;
     }
 
 
@@ -64,8 +69,9 @@ class PdoConnection {
      * @param array $params
      * @return void
      */
-    public function select($query, $params = null){
-            return $this->execQuery($query, $params);
+    public function select($query, $params = null)
+    {
+        return $this->execQuery($query, $params);
     }
 
     /**
@@ -75,7 +81,10 @@ class PdoConnection {
      * @param array $params
      * @return void
      */
-    public function insert($query, $params){
+    public function insert($query, $params)
+    {
+        imprimir::frase("entra inser pdoconection");
+        imprimir::imprime("Squery", $query);
         return $this->execQueryNoResult($query, $params);
     }
 
@@ -84,7 +93,8 @@ class PdoConnection {
      *
      * @return void
      */
-    public function lastInsertId() {
+    public function lastInsertId()
+    {
         return $this->bbdd->lastInsertId();
     }
 
@@ -95,9 +105,8 @@ class PdoConnection {
      * @param array $params
      * @return void
      */
-    public function update($query, $params){
-
-    }
+    public function update($query, $params)
+    { }
 
 
     /**
@@ -107,7 +116,8 @@ class PdoConnection {
      * @param array $params
      * @return void
      */
-    public function delete($query, $params){
+    public function delete($query, $params)
+    {
         return $this->execQueryNoResult($query, $params);
     }
 
@@ -118,7 +128,8 @@ class PdoConnection {
      * @param [type] $params
      * @return array
      */
-    private function execQuery($query, $params) {
+    private function execQuery($query, $params)
+    {
         $ps = $this->bbdd->prepare($query);
         $ps->execute($params);
         return $ps->fetchAll(\PDO::FETCH_ASSOC);
@@ -131,9 +142,9 @@ class PdoConnection {
      * @param [type] $params
      * @return integer
      */
-    private function execQueryNoResult($query, $params) {
+    private function execQueryNoResult($query, $params)
+    {
         $ps = $this->bbdd->prepare($query);
         return $ps->execute($params);
     }
-
 };
