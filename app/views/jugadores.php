@@ -15,7 +15,8 @@
             foreach ($jugadores as $jugador) {
                 echo "<a href='".$config['site']['root']."/jugador/".$jugador->codigo."'>";
                 echo "<figure class='playersTeam'>";
-                echo "<img src='images/".$jugador->foto."' />";
+            //    http://localhost/DWS/public/images/El atributo foto no existe
+                echo "<img src='./images/".$jugador->foto."' />";
                 echo "<figcaption>".$jugador->Nombre."</figcaption></figure></a>";
             }
         ?>          
