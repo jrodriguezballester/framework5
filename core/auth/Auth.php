@@ -15,7 +15,14 @@ class Auth {
      */
     static function crypt($password) {
         imprimir::resalta("entra en encryptar");
-        return password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
+        if(defined('PASSWORD_ARGON2ID')) {
+            imprimir::resalta("1");
+            $hash = password_hash('password123', PASSWORD_ARGON2ID, array('time_cost' => 10, 'memory_cost' => '2048k', 'threads' => 6));
+        } else {
+            imprimir::resalta("2");
+            $hash = password_hash('password123', PASSWORD_DEFAULT, array('time_cost' => 10, 'memory_cost' => '2048k', 'threads' => 6));
+        }
+        return $hash;
     }
 
     /**
@@ -26,7 +33,11 @@ class Auth {
      * @return boolean
      */
     static function passwordVerify($password, $idUser) {
-        return password_verify($password, $idUser); //
+        //viene loginControler 25
+         
+      // password_verify($password, $hashed_password) linea internet
+      
+        return password_verify($password, $idUser); //linea de cesar ¿compara pass con user???
     }
 
     /**
@@ -35,6 +46,9 @@ class Auth {
      * @return boolean
      */
     static function check() {
+  //  imprimir::frase("entra en check Auth");
+    
+    return ($_SESSION!=null);
         
     }
 

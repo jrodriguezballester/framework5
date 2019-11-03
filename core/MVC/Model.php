@@ -1,6 +1,6 @@
 <?php
 namespace core\MVC;
-
+use core\MVC\imprimir;
 //use \core\database\PdoConnection AS PdoConnection;
 use \core\database\DB AS DB;
 use PDO;
@@ -276,7 +276,7 @@ abstract class Model { //implements \ArrayAccess{
         imprimir::imprime("params",$params);
 
         if ($this->exists) {
-            imprimir::frase("ya existe ");
+            imprimir::frase("exists->mira solo la diferencia de atributos hace update");
             $attr = array_diff($this->attributes, $this->originals);
             imprimir::imprime("attr",$attr);
             if (!empty($attr)) {
@@ -288,7 +288,7 @@ abstract class Model { //implements \ArrayAccess{
                     ->update($params);
             }
         } else {
-            imprimir::frase("no existe");
+            imprimir::frase("no exists->añade todos atributos hace insert");
             imprimir::imprime("attributes:",$this->attributes);
             foreach ($this->attributes as $key => $value) {
                 $params[$key] = $value;    

@@ -132,6 +132,7 @@ class PdoConnection
     {
         $ps = $this->bbdd->prepare($query);
         $ps->execute($params);
+      
         return $ps->fetchAll(\PDO::FETCH_ASSOC);
     }
 

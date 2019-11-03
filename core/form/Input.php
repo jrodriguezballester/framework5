@@ -26,12 +26,12 @@ class Input
     static function check($fields, $on = false)
     {
         imprimir::frase("entra en check");
-        //     imprimir::imprime("field",$fields);
-        //     imprimir::imprime("on",$on);
+             imprimir::imprime("field",$fields);
+             imprimir::imprime("on",$on);
         $chekeado = true;
         foreach ($fields as $key) {
-            //         imprimir::linea("field:",$key);
-            //         imprimir::linea("on:",$on[$key]);
+                     imprimir::linea("field:",$key);
+                     imprimir::linea("on:",$on[$key]);
 
             if ($on[$key] == null) {
                 $chekeado == false;
@@ -64,9 +64,9 @@ class Input
     {
         imprimir::frase("chekeando........");
         $ext = pathinfo($path, PATHINFO_EXTENSION);
+        //hacer con el array
         switch ($ext) {
             case "jpg":
-
             case "bmp":
             case "png":              
                 imprimir::frase("extension chequeada true");
