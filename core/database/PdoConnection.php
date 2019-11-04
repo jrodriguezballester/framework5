@@ -83,8 +83,8 @@ class PdoConnection
      */
     public function insert($query, $params)
     {
-        imprimir::frase("entra inser pdoconection");
-        imprimir::imprime("Squery", $query);
+     //   imprimir::frase("entra inser pdoconection");
+     //   imprimir::imprime("Squery", $query);
         return $this->execQueryNoResult($query, $params);
     }
 

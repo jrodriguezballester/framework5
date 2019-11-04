@@ -16,7 +16,7 @@
                 echo "<a href='".$config['site']['root']."/jugador/".$jugador->codigo."'>";
                 echo "<figure class='playersTeam'>";
             //    http://localhost/DWS/public/images/El atributo foto no existe
-                echo "<img src='./images/".$jugador->foto."' />";
+                echo "<img src=".$config['site']['root']."/public/images/".$jugador->foto."' />";
                 echo "<figcaption>".$jugador->Nombre."</figcaption></figure></a>";
             }
         ?>          

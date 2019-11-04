@@ -18,7 +18,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
- //   private $redirect_to = '/';
+    private $redirect_to = '/';
   
 
     /**
@@ -28,19 +28,19 @@ class RegisterController extends Controller
      */
     public function RegisterAction()
     {
-         imprimir::frase("entra en RegisterAction");
-
+  //      imprimir::frase("entra en RegisterAction");
         $userName = input::str($_POST['user']);
         $password = auth::crypt(input::str($_POST['password']));
-
 
         if (input::check(['user', 'password'], $_POST)) {
 
             $idUser = $this->createUser($userName, $password);
-            imprimir::linea("idUser", $idUser);
+  //          imprimir::linea("idUser", $idUser);
             if ($idUser > 0) {
                 $this->uploadAvatar($_FILES['avatar']['name'], $_FILES["avatar"]["tmp_name"], $idUser);
+               
                 header('Location: ' . $GLOBALS['config']['site']['root'] . $this->redirect_to);
+               
             } else echo 'ALGO HA FALLADO';
         } else {
             echo '<br>Usuario o password vacío';
@@ -63,7 +63,7 @@ class RegisterController extends Controller
         $user->$userNameField = $userName;
         $user->$passwordField = $password;
         if ($user->save()) {
-            imprimir::frase("lo ha save__ado");
+    //        imprimir::frase("lo ha save__ado");
             return $user->lastInsertId();
         } else return -1;
     }
