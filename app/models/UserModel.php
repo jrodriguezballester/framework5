@@ -8,6 +8,7 @@ class UserModel extends Model {
     protected $key = 'id'; 
     protected static $userNameField = 'usuario';
     protected static $passwordField = 'password';
+   
     
     static function getUserNameField() {
         return self::$userNameField;
@@ -16,5 +17,4 @@ class UserModel extends Model {
     static function getPasswordField() {
         return self::$passwordField;
     }
-
 }

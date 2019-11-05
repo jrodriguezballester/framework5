@@ -30,22 +30,23 @@
         <a href="<?= $config['site']['root'] ?>/logout">
             <div class="option right">Logout</div>
         </a>
-        <div class="option right"><?= $_SESSION['userName'] ?>
+        <div class="option right"><?= $_SESSION['userName'] ?>    
         <?php
-            if(file_exists ( $config['site']['root']."/public/images/avatares/avatar".$_SESSION['foto']."png")){
+            // if(file_exists ( $config['site']['root']."/public/images/avatares/avatar".$_SESSION['foto'].".jpg")){
+                if(true){
                echo "true" ?>
-                <img src="<?= $config['site']['root'] ?>/public/images/avatares/avatar<?php echo $_SESSION['foto'] ?>.png">
+                <img src="<?= $config['site']['root'] ?>/public/images/avatares/avatar<?php echo $_SESSION['foto'] ?>.png" height="50px">
                 <?php
             }else{
                echo "false" ?>
-                <img src="<?= $config['site']['root'] ?>/public/images/avatares/avatar<?php echo $_SESSION['foto'] ?>.jpg">
+                <img src="<?= $config['site']['root'] ?>/public/images/avatares/avatar<?php echo $_SESSION['foto'] ?>.jpg" height="50px">
                 <?php
             }
         ?>
- 
      
     </div>
     <?php
     }
     ?>
 </div>
+ 

@@ -57,6 +57,11 @@ return array(
 			"controller" => "login",
 			"action" => "logout"
 		),
+		"error" => array(
+			"route" => $subdomain."/logout",
+			"controller" => "login",
+			"action" => "logout"
+		)
 
 	),
 	"error" => "error.php"

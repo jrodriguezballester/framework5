@@ -35,7 +35,7 @@ class LoginController extends Controller
             if (auth::passwordVerify($password,  $userName)) {
                 //      imprimir::frase("ha verificado correcto");
                 $this->setSession($userName);
-              //  header('Location: ' . $GLOBALS['config']['site']['root'] . $this->redirect_to);
+                header('Location: ' . $GLOBALS['config']['site']['root'] . $this->redirect_to);
             } else {
                 echo "Usuario o password incorrectos";
             }

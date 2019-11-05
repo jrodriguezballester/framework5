@@ -27,7 +27,17 @@ class RegisterController extends Controller
      * @return boolean
      */
     public function RegisterAction()
-    {
+    
+    {  
+        $error=false;
+        if($_POST['user']==null){
+        $error=true;
+    }
+    if($_POST['password']!=$_POST['password2']){
+        echo "contraseñas distintas";
+        $error=true;
+    }
+    if(!$error){
   //      imprimir::frase("entra en RegisterAction");
         $userName = input::str($_POST['user']);
         $password = auth::crypt(input::str($_POST['password']));
@@ -46,6 +56,7 @@ class RegisterController extends Controller
             echo '<br>Usuario o password vacío';
         }
     }
+    }
 
     /**
      * guarda los datos en la tabla usuario y devuelve el id 
@@ -60,8 +71,10 @@ class RegisterController extends Controller
         $user = new UserModel();
         $userNameField = $user->getUserNameField();
         $passwordField = $user->getPasswordField();
+       
         $user->$userNameField = $userName;
         $user->$passwordField = $password;
+     
         if ($user->save()) {
     //        imprimir::frase("lo ha save__ado");
             return $user->lastInsertId();
@@ -81,6 +94,7 @@ class RegisterController extends Controller
         if (input::checkImage($fileName)) {
             $avatar = 'avatar' . $idUser . '.' . pathinfo($fileName)['extension'];
             $path = $GLOBALS['basedir'] . ds . 'public' . ds . 'images' . ds . 'avatares' . ds . $avatar;
+         
             if (move_uploaded_file($tmpFileName, $path))
                 return true;
             else return false;

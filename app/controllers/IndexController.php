@@ -27,4 +27,8 @@ class IndexController extends Controller {
     public function LoginAction() {
         $this->renderView('login');
     }
+    public function ErrorAction() {
+        $this->renderView('error');
+        
+    }
 }

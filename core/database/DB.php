@@ -119,7 +119,19 @@ class DB {
         $sql.=' VALUES ('.substr($values, 0, -1).')';
         $connection = PdoConnection::getInstance();
         imprimir::linea("SQL: ",$sql);
-        return $connection->insert($sql, $params);
+////////////////corrigiendo error mysql////////
+try {
+    return $connection->insert($sql, $params);
+  
+
+} catch (\PDOException $e) {
+
+    echo 'Ocurrió un error en la consulta: '.$e->getMessage();
+
+}
+
+///////////////////
+   //     return $connection->insert($sql, $params);
     }
 
     public function lastInsertId() {

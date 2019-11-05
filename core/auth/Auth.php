@@ -19,12 +19,12 @@ class Auth
      */
     static function crypt($password)
     {
-        imprimir::resalta("entra en encryptar");
+   //     imprimir::resalta("entra en encryptar");
         //if(defined('PASSWORD_ARGON2ID')) {
         //imprimir::resalta("1");
         //$hash = password_hash('password123', PASSWORD_ARGON2ID, array('time_cost' => 10, 'memory_cost' => '2048k', 'threads' => 6));
         // } else {
-        imprimir::resalta("2");
+     //   imprimir::resalta("2");
         $hash = password_hash($password, PASSWORD_DEFAULT, array('time_cost' => 10, 'memory_cost' => '2048k', 'threads' => 6));
         //$hash = password_hash('password123', PASSWORD_DEFAULT);
         //}
@@ -63,7 +63,6 @@ class Auth
      */
     static function check()
     {
-        //  imprimir::frase("entra en check Auth");
         if (isset($_COOKIE['DWS_framework'])) {
             $_SESSION['userName'] = base64_decode($_COOKIE['DWS_framework']);
             return (base64_decode($_COOKIE['DWS_framework']));
