@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function ValidateAction()
+    public function ValidateAction() //logearse
     {
         //    imprimir::frase("validando....");
         if (input::check(['user', 'password'], $_POST)) {
@@ -63,8 +63,8 @@ class LoginController extends Controller
      * @return void
      */
     private function setSession($userName)
-    {
-        //meter sesion id
+    {//viene validateaction
+        //meter sesion id o token
         $_SESSION['logged_in'] = true;
         $_SESSION['userName'] = $userName;
         //   $_SESSION['foto'] =$use[0]->id;	

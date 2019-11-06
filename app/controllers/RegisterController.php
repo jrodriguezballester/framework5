@@ -19,7 +19,7 @@ class RegisterController extends Controller
      * @var string
      */
     private $redirect_to = '/';
-  
+
 
     /**
      * Registra un nuevo usuario
@@ -27,35 +27,34 @@ class RegisterController extends Controller
      * @return boolean
      */
     public function RegisterAction()
-    
-    {  
-        $error=false;
-        if($_POST['user']==null){
-        $error=true;
-    }
-    if($_POST['password']!=$_POST['password2']){
-        echo "contraseñas distintas";
-        $error=true;
-    }
-    if(!$error){
-  //      imprimir::frase("entra en RegisterAction");
-        $userName = input::str($_POST['user']);
-        $password = auth::crypt(input::str($_POST['password']));
 
-        if (input::check(['user', 'password'], $_POST)) {
-
-            $idUser = $this->createUser($userName, $password);
-  //          imprimir::linea("idUser", $idUser);
-            if ($idUser > 0) {
-                $this->uploadAvatar($_FILES['avatar']['name'], $_FILES["avatar"]["tmp_name"], $idUser);
-               
-                header('Location: ' . $GLOBALS['config']['site']['root'] . $this->redirect_to);
-               
-            } else echo 'ALGO HA FALLADO';
-        } else {
-            echo '<br>Usuario o password vacío';
+    {
+        $error = false;
+        if ($_POST['user'] == null) {
+            $error = true;
         }
-    }
+        if ($_POST['password'] != $_POST['password2']) {
+            echo "contraseñas distintas";
+            $error = true;
+        }
+        if (!$error) {
+            //      imprimir::frase("entra en RegisterAction");
+            $userName = input::str($_POST['user']);
+            $password = auth::crypt(input::str($_POST['password']));
+
+            if (input::check(['user', 'password'], $_POST)) {
+
+                $idUser = $this->createUser($userName, $password);
+                //          imprimir::linea("idUser", $idUser);
+                if ($idUser > 0) {
+                    $this->uploadAvatar($_FILES['avatar']['name'], $_FILES["avatar"]["tmp_name"], $idUser);
+
+                    header('Location: ' . $GLOBALS['config']['site']['root'] . $this->redirect_to);
+                } else echo 'ALGO HA FALLADO';
+            } else {
+                echo '<br>Usuario o password vacío';
+            }
+        }
     }
 
     /**
@@ -71,12 +70,12 @@ class RegisterController extends Controller
         $user = new UserModel();
         $userNameField = $user->getUserNameField();
         $passwordField = $user->getPasswordField();
-       
+
         $user->$userNameField = $userName;
         $user->$passwordField = $password;
-     
+
         if ($user->save()) {
-    //        imprimir::frase("lo ha save__ado");
+            //        imprimir::frase("lo ha save__ado");
             return $user->lastInsertId();
         } else return -1;
     }
@@ -94,7 +93,8 @@ class RegisterController extends Controller
         if (input::checkImage($fileName)) {
             $avatar = 'avatar' . $idUser . '.' . pathinfo($fileName)['extension'];
             $path = $GLOBALS['basedir'] . ds . 'public' . ds . 'images' . ds . 'avatares' . ds . $avatar;
-         
+            //borrar todos avatar.iduser.*  en $path /////////////////////////////
+            unlink($path . 'avatar' . $idUser);
             if (move_uploaded_file($tmpFileName, $path))
                 return true;
             else return false;

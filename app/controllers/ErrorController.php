@@ -8,7 +8,7 @@ use core\database\DB as DB;
 class ErrorController extends Controller {
 
     public function ErrorAction() {
-        $this->renderView('portada');
+        $this->renderView('error');
         
     }
 }

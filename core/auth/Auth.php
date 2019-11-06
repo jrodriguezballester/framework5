@@ -62,7 +62,8 @@ class Auth
      * @return boolean
      */
     static function check()
-    {
+    
+    {//meter sesion id en la cookie y comprobar tambien.
         if (isset($_COOKIE['DWS_framework'])) {
             $_SESSION['userName'] = base64_decode($_COOKIE['DWS_framework']);
             return (base64_decode($_COOKIE['DWS_framework']));

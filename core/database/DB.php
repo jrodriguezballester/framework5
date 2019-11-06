@@ -4,6 +4,7 @@ namespace core\database;
 
 use \core\database\PdoConnection AS PdoConnection;
 use core\MVC\imprimir;
+use \core\MVC\KernelException;
 
 class DB {
 
@@ -122,11 +123,9 @@ class DB {
 ////////////////corrigiendo error mysql////////
 try {
     return $connection->insert($sql, $params);
-  
-
 } catch (\PDOException $e) {
-
-    echo 'Ocurrió un error en la consulta: '.$e->getMessage();
+    throw new KernelException("Ocurrió un error en la consulta: ".$e->getMessage());
+  //  echo 'Ocurrió un error en la consulta: '.$e->getMessage();
 
 }
 

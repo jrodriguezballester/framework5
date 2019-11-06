@@ -1,4 +1,4 @@
-comprobar imagen; pasarpath y verificar extension
+comprobar imagen; pasar path y verificar extension
 auth 
 encriptar cryp($pass) password_hash($pass.PASSWORD_DEFAULT);
 verificar pass
@@ -18,3 +18,35 @@ if ($user->save())
 returt $user->lastInserId() else return -1
 subir fichero avatar
 
+jwt Bajarse la libreria 
+
+
+cliente manda credenciales, en el servidor comprobar y pasa sesion id al cliente y guarda sesion.id cuando el cliente quiere hacer algo pasa la sesion id 
+
+en pagina jugador hacer un comentario y comprobar que esta logueado para guardarla y se guarda en una tabla de base de datos
+ el cliente manda credenciales, el server crea (y lo monta, user,admin,...) un token y lo manda al cliente; despues cuando el cliente hace alguna 
+ peticion manda el token que luego comprueba el servidor.
+ Donde lo guardamos en cookies,o localstorage 
+
+comentario; tabla con id, iduser,id jugador, comentario hacer claves ajenas
+cuando abra jugador saldran todos los comentarios de ese jugador
+
+ create token (username){
+ $time=time()
+ $token=array(
+     ...
+     data=<{
+         lo que quiero guardar nombre... no muchos campos
+     }
+ )
+
+ $jwt=JWT::encode($token,self::secretkey,self::encryption)
+ }
+ validate Accion{
+ crea token, guardo en la cookie
+ }
+ check{
+ si existe cookie,
+ comprueba si los el token pasado por nosotros es el mismo decode
+ luego si queremos comprobamos los campos que hemos metido
+ }
