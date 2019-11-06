@@ -50,3 +50,10 @@ cuando abra jugador saldran todos los comentarios de ese jugador
  comprueba si los el token pasado por nosotros es el mismo decode
  luego si queremos comprobamos los campos que hemos metido
  }
+
+
+Pendiente
+Jugador.php hacer action del formulario.
+
+ComentarioModel
+
