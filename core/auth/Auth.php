@@ -43,8 +43,8 @@ class Auth
         //viene loginControler 25
      
         $user= UserModel::where('usuario','=',$userName)->get();
-        imprimir::resalta("aqui");
-      //  imprimir::imprime("user",$user);
+     //   imprimir::resalta("aqui");
+     //  imprimir::imprime("user",$user);
       
         $hash_pass=$user[0]->password;
         imprimir::imprime("valor:",$hash_pass);

@@ -53,7 +53,7 @@ cuando abra jugador saldran todos los comentarios de ese jugador
 
 
 Pendiente
-Jugador.php hacer action del formulario.
 
-ComentarioModel
 
+
+//ComentarioController cuando comentario vacio informar;

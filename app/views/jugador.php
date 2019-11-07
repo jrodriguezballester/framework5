@@ -21,9 +21,10 @@
         echo '<tr><th>Posición</th><td>' . $jugador->Posicion . '</td></tr>';
         echo "</table>";
         ?>
-        <form name="formulario" method="post" action="<?= $config['site']['root'] ?>/app/models/ComentarioModel.php">
-            <!-- Area de texto extensa -->
-            <textarea placeholder="Escribe aquí tu comentario..." name="texto" cols="80" rows="5"></textarea>
+        <form name="formulario" method="post" action="<?= $config['site']['root'] ?>/registraComentario">
+        <input type="hidden" name="idjugador" value="<?=$jugador->codigo?>" />  
+        
+            <textarea placeholder="Escribe aquí tu comentario..." name="comentario" cols="80" rows="5"></textarea>
             <input type="submit" name="guardar" value="Guardar">
         </form>
 

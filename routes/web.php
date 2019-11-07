@@ -58,9 +58,14 @@ return array(
 			"action" => "logout"
 		),
 		"error" => array(
-			"route" => $subdomain."/logout",
-			"controller" => "login",
-			"action" => "logout"
+			"route" => $subdomain."/error",
+			"controller" => "error",
+			"action" => "error"
+		),
+		"registraComentario" => array(
+			"route" => $subdomain."/registraComentario",
+			"controller" => "comentario",
+			"action" => "comentario"
 		)
 
 	),
