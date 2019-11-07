@@ -291,9 +291,13 @@ abstract class Model { //implements \ArrayAccess{
             imprimir::frase("no exists->añade todos atributos hace insert");
             imprimir::imprime("attributes:",$this->attributes);
             foreach ($this->attributes as $key => $value) {
-                $params[$key] = $value;    
+                imprimir::linea("key",$key) ;
+                imprimir::linea("value",$value) ;
+                $params[$key] = $value;   
+                imprimir::imprime("params:",$params);
             }
-            imprimir::imprime("params:",$this->params);
+            imprimir::resalta("aqui");
+           // imprimir::imprime("params:",$this->params);
             return DB::table($this->getTable())->insert($params);
         }
     }
