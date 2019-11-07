@@ -159,6 +159,18 @@ abstract class Model { //implements \ArrayAccess{
         return $instance->toInstances($results)[0];
     }
 
+
+    
+    public static function find2($campo,$value) {
+        $instance = self::getNewInstance();
+        $results = DB::table($instance->getTable())
+                                ->where($campo, '=', $value)
+                                ->get();
+        return $instance->toInstances($results)[0];
+      //  return $results;
+
+    }
+
     /**
      * Devuelve el nombre de la tabla sanitizada asociada al modelo
      *
@@ -271,14 +283,14 @@ abstract class Model { //implements \ArrayAccess{
      * @return void
      */
     public function save(){
-        imprimir::frase("entra en save");
+     //   imprimir::frase("entra en save");
         $params = array();
-        imprimir::imprime("params",$params);
+     //   imprimir::imprime("params",$params);
 
         if ($this->exists) {
-            imprimir::frase("exists->mira solo la diferencia de atributos hace update");
+        //    imprimir::frase("exists->mira solo la diferencia de atributos hace update");
             $attr = array_diff($this->attributes, $this->originals);
-            imprimir::imprime("attr",$attr);
+         //   imprimir::imprime("attr",$attr);
             if (!empty($attr)) {
                 foreach ($attr as $key => $value) {
                     $params[$key] = $value;    
@@ -288,15 +300,15 @@ abstract class Model { //implements \ArrayAccess{
                     ->update($params);
             }
         } else {
-            imprimir::frase("no exists->añade todos atributos hace insert");
-            imprimir::imprime("attributes:",$this->attributes);
+         //   imprimir::frase("no exists->añade todos atributos hace insert");
+          //  imprimir::imprime("attributes:",$this->attributes);
             foreach ($this->attributes as $key => $value) {
-                imprimir::linea("key",$key) ;
-                imprimir::linea("value",$value) ;
+           //     imprimir::linea("key",$key) ;
+           //     imprimir::linea("value",$value) ;
                 $params[$key] = $value;   
-                imprimir::imprime("params:",$params);
+           //     imprimir::imprime("params:",$params);
             }
-            imprimir::resalta("aqui");
+         //   imprimir::resalta("aqui");
            // imprimir::imprime("params:",$this->params);
             return DB::table($this->getTable())->insert($params);
         }

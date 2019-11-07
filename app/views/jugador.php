@@ -22,12 +22,27 @@
         echo "</table>";
         ?>
         <form name="formulario" method="post" action="<?= $config['site']['root'] ?>/registraComentario">
-        <input type="hidden" name="idjugador" value="<?=$jugador->codigo?>" />  
-        
+            <input type="hidden" name="idjugador" value="<?= $jugador->codigo ?>" />
+
             <textarea placeholder="Escribe aquí tu comentario..." name="comentario" cols="80" rows="5"></textarea>
             <input type="submit" name="guardar" value="Guardar">
         </form>
+        <?php
+        for ($i=0; $i <count($comentarios['attributes']) ; $i++) { 
+      
+        echo "<dl>
 
+            <dt>".$comentarios->idUsuario."</dt>
+
+            <dd>".$comentarios->Comentario."</dd>
+
+        </dl>";
+        
+    }
+
+        ?>
+
+       
     </div>
 </body>
 
