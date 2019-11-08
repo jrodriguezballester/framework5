@@ -14,7 +14,8 @@ class JugadorController extends Controller {
         $jugador = JugadorModel::find($idJugador);
         $campo=ComentarioModel::getjugadorField();
         $comentarios=ComentarioModel::find2($campo,$idJugador); 
-        imprimir::imprime("coment",$comentarios);
+    //    $comentarios=ComentarioModel::get($campo,$idJugador); 
+//        imprimir::imprime("coment",$comentarios);
         $this->renderView('jugador', ['jugador' => $jugador,'comentarios'=> $comentarios]);
     }
 

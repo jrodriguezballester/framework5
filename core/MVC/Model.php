@@ -166,7 +166,7 @@ abstract class Model { //implements \ArrayAccess{
         $results = DB::table($instance->getTable())
                                 ->where($campo, '=', $value)
                                 ->get();
-        return $instance->toInstances($results)[0];
+        return $results;
       //  return $results;
 
     }

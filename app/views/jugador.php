@@ -28,13 +28,13 @@
             <input type="submit" name="guardar" value="Guardar">
         </form>
         <?php
-        for ($i=0; $i <count($comentarios['attributes']) ; $i++) { 
+        for ($i=0; $i <count($comentarios) ; $i++) { 
       
         echo "<dl>
 
-            <dt>".$comentarios->idUsuario."</dt>
+            <dt>".$comentarios[$i]['idusuario']."</dt>
 
-            <dd>".$comentarios->Comentario."</dd>
+            <dd>".$comentarios[$i]['Comentario']."</dd>
 
         </dl>";
         

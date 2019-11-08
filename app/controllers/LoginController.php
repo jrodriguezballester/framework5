@@ -7,6 +7,7 @@ use app\models\UserModel;
 use core\form\Input;
 use core\auth\Auth;
 use core\MVC\imprimir;
+use core\JWT\JWT;
 
 /**
  * Clase para el login de usuarios
@@ -25,6 +26,22 @@ class LoginController extends Controller
      *
      * @return void
      */
+    // // public function ValidateAction() //logearse
+    // // {
+    // //     //    imprimir::frase("validando....");
+    // //     if (input::check(['user', 'password'], $_POST)) {
+    // //         //      imprimir::frase("usuario, contraseña distinto null ......");
+    // //         $userName = input::str($_POST['user']);
+    // //         $password = input::str($_POST['password']);
+    // //         if (auth::passwordVerify($password,  $userName)) {
+    // //             //      imprimir::frase("ha verificado correcto");
+    // //             $this->setSession($userName);
+    // //             header('Location: ' . $GLOBALS['config']['site']['root'] . $this->redirect_to);
+    // //         } else {
+    // //             echo "Usuario o password incorrectos";
+    // //         }
+    // //     }
+    // // }
     public function ValidateAction() //logearse
     {
         //    imprimir::frase("validando....");
@@ -35,12 +52,18 @@ class LoginController extends Controller
             if (auth::passwordVerify($password,  $userName)) {
                 //      imprimir::frase("ha verificado correcto");
                 $this->setSession($userName);
-                header('Location: ' . $GLOBALS['config']['site']['root'] . $this->redirect_to);
+          //      header('Location: ' . $GLOBALS['config']['site']['root'] . $this->redirect_to);
             } else {
                 echo "Usuario o password incorrectos";
             }
         }
     }
+
+
+
+
+
+
 
     /**
      * Destruye la sesión y borra la cookie
@@ -62,12 +85,55 @@ class LoginController extends Controller
      * @param [type] $userId
      * @return void
      */
+    // // // private function setSession($userName)
+    // // // {//viene validateaction
+    // // //     //meter sesion id o token
+    // // //     $_SESSION['logged_in'] = true;
+    // // //     $_SESSION['userName'] = $userName;
+    // // //     //   $_SESSION['foto'] =$use[0]->id;	
+    // // //     setcookie('DWS_framework', base64_encode($userName), time() + (60 * 60 * 24 * 5)); //5 dias
+    // // // }
+
     private function setSession($userName)
     {//viene validateaction
         //meter sesion id o token
         $_SESSION['logged_in'] = true;
         $_SESSION['userName'] = $userName;
+        $token=$userName;
+        $jwt=JWT::encode($token,"miclavesecreta");
         //   $_SESSION['foto'] =$use[0]->id;	
-        setcookie('DWS_framework', base64_encode($userName), time() + (60 * 60 * 24 * 5)); //5 dias
+       imprimir::imprime("jwt",$jwt);
+        setcookie('DWS_framework', base64_encode($userName),$token, time() + (60 * 60 * 24 * 5)); //5 dias
     }
-}
+}///////////////////////////////////////////////
+//     use ReallySimpleJWT\Token;
+
+//     // Generate a token
+//     $token = Token::getToken('userIdentifier', 'secret', 'tokenExpiryDateTimeString', 'issuerIdentifier');
+    
+//     // Validate the token
+//     $result = Token::validate($token, 'secret');
+
+//     create token (username){
+//         $time=time()
+//         $token=array(
+//             ...
+//             data=<{
+//                 lo que quiero guardar nombre... no muchos campos
+//             }
+//         )
+       
+      
+//         }
+//         validate Accion{
+//         crea token, guardo en la cookie
+//         }
+//         check{
+//         si existe cookie,
+//         comprueba si los el token pasado por nosotros es el mismo decode
+//         luego si queremos comprobamos los campos que hemos metido
+//         }
+       
+       
+
+// }
