@@ -14,10 +14,11 @@
         <?php
             foreach ($jugadores as $jugador) {
                 echo "<a href='".$config['site']['root']."/jugador/".$jugador->codigo."'>";
-                echo "<figure class='playersTeam'>";
-            //    http://localhost/DWS/public/images/El atributo foto no existe
-                echo "<img src=".$config['site']['root']."/public/images/".$jugador->foto."' />";
+                echo "<figure class='playersTeam'>";       
+                echo '<img src="'.$config['site']['root']."/public/images/".$jugador->foto.'" width="100" height="100"/>';        
                 echo "<figcaption>".$jugador->Nombre."</figcaption></figure></a>";
+              
+
             }
         ?>          
     </div>

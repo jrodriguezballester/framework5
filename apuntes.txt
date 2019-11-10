@@ -1,22 +1,15 @@
 comprobar imagen; pasar path y verificar extension
 auth 
-encriptar cryp($pass) password_hash($pass.PASSWORD_DEFAULT);
+encriptar cryp($pass)=> password_hash($pass.PASSWORD_DEFAULT);
 verificar pass
-sacar nombres desde model
+sacar nombres desde model (base de datos)
 user=usermodel::where($userNamefield,=,$iduser)->get(0)
 $hash=$user->passwordField;
 
-model 
-protected static $userNamefield="usuario"
 
-registro controller
-private $redirige="/";
 registrarAction
 verificar usuario y contraseña
-create user
-if ($user->save())
-returt $user->lastInserId() else return -1
-subir fichero avatar
+create user y subir fichero avatar
 
 jwt Bajarse la libreria 
 
@@ -53,7 +46,6 @@ cuando abra jugador saldran todos los comentarios de ese jugador
 
 
 Pendiente
-
 
 
 //ComentarioController cuando comentario vacio informar;

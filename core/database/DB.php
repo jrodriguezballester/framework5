@@ -108,7 +108,7 @@ class DB {
     }
 
     public function insert($record) {
-        imprimir::frase("entra Insert");
+     //   imprimir::frase("entra Insert");
         $sql ='INSERT INTO '.$this->getTable().' (';
         $values = '';
         foreach ($record as $key => $value) {
@@ -116,16 +116,19 @@ class DB {
             $values.=":$key,";
             $params[":".$key] = $value;
         }
+
         $sql = substr($sql, 0, -1).')';
         $sql.=' VALUES ('.substr($values, 0, -1).')';
         $connection = PdoConnection::getInstance();
         imprimir::linea("SQL: ",$sql);
+        imprimir::imprime("params",$params);
 ////////////////corrigiendo error mysql////////
 try {
     return $connection->insert($sql, $params);
-} catch (\PDOException $e) {
+} catch (Exception $e) {
+    imprimir::resalta("db error");
     throw new KernelException("Ocurrió un error en la consulta: ".$e->getMessage());
-  //  echo 'Ocurrió un error en la consulta: '.$e->getMessage();
+    
 
 }
 

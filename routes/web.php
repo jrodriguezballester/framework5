@@ -66,6 +66,11 @@ return array(
 			"route" => $subdomain."/registraComentario",
 			"controller" => "comentario",
 			"action" => "comentario"
+		),
+		"mensaje" => array(
+			"route" => $subdomain."/mensaje/:mensaje",
+			"controller" => "mensaje",
+			"action" => "mensaje"
 		)
 
 	),

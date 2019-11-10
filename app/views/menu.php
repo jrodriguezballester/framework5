@@ -13,9 +13,9 @@
     use core\auth\Auth;
     use core\MVC\imprimir;
 
-    
+
     if (!auth::check()) {
-      //  imprimir::frase("check..false");
+        //  imprimir::frase("check..false");
         ?>
         <a href="<?= $config['site']['root'] ?>/registro">
             <div class="option right">Registro</div>
@@ -25,28 +25,18 @@
         </a>
     <?php
     } else {
-    //    imprimir::frase("check...true");
+        //    imprimir::frase("check...true");
         ?>
         <a href="<?= $config['site']['root'] ?>/logout">
             <div class="option right">Logout</div>
         </a>
-        <div class="option right"><?= $_SESSION['userName'] ?>    
-        <?php
-            // if(file_exists ( $config['site']['root']."/public/images/avatares/avatar".$_SESSION['foto'].".jpg")){
-                if(true){
-               echo "true" ?>
-                <img src="<?= $config['site']['root'] ?>/public/images/avatares/avatar<?php echo $_SESSION['foto'] ?>.png" height="50px">
-                <?php
-            }else{
-               echo "false" ?>
-                <img src="<?= $config['site']['root'] ?>/public/images/avatares/avatar<?php echo $_SESSION['foto'] ?>.jpg" height="50px">
-                <?php
-            }
-        ?>
-     
-    </div>
+        <div class="option right"><?= $_SESSION['userName'] ?>
+          
+                <img src="<?= $config['site']['root'] ?>/public/images/avatares/<?php echo $_SESSION['foto'] ?>" height="50px">
+          
+
+        </div>
     <?php
     }
     ?>
 </div>
- 

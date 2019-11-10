@@ -1,0 +1,37 @@
+En esta Evaluable:
+- Se ha hecho un sistema de login con $SESION y cookie; No se ha conseguido hacerlo con JWT
+ por problemas al autentificarlo; El código esta comentado por si hay que recuperarlo en un futuro.
+- Se comprueba que user y password sean no vacias y vengan del formulario; Se sanitizan y encryta.
+- Se comprueba que el fichero Avatar tenga la extension de una imagen.
+- Para Logearse se comprueba la cookie, y la SESION.
+- Se ha conseguido un sistema de comentarios para cada jugador SOLAMENTE por un usuario Logeado.
+- Se ha conseguido mostrar Mensajes de Confirmacion (sin utilizar JavaScript), incluidos 
+  algunos provenientes del MySQL.
+
+------
+Mejoras:
+- El sistema de mostrar los mensajes (mensajes.php) se ha utilizado el sistema de llamadas
+  de Router.php pasando una sola variable (mensaje/:mensaje), pudiendose quedar corto para ganar 
+  funcionalidades (redirigir o volver a la misma pagina), que se ha solventado parcialmente:
+        case 1:
+            $texto = 'Tienes que Loguearte';
+            $redirige = "/login";
+        break;
+  Tambien mejoraría el codigo haciendo un array; pero empecé con un switch y así lo he dejado.
+
+ -El sistema de comentarios se basa en la tabla "comentarios" (script de creaccion en archivo 
+   "base de datos"); hay que decir que habría que reescribir los nombres debido a que en un 
+   principio gastaba idUsuario (lo mas recomendable); pero como no quería hacer llamada a la base
+   de datos pasé a guardar el nombre de usuario;
+    Al final si que se hacen llamadas a la BD con lo que deberia volver a guardar idusuario.
+   
+   En los comentarios se muestran los campos de la tabla Comentarios y de la tabla Usuarios.
+   Si se quisieran mostrar fechas,puntuación,alias ... habría que guardarlo en su correspondiente
+   tabla. 
+
+-El archivo avatar se guarda como AvatarNombreUsuario porque este es de tipo Unique en la 
+  base de datos; y porque con AvatarIdUsuario, tenía problemas para guardarlo  (o por lo menos la extension) 
+  en la base de Datos.
+
+-Habría que controlar todos los posibles errores (MySQL y otros) que son poco amigables.
+ 

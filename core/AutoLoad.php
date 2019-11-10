@@ -1,4 +1,6 @@
 <?php
+namespace AutoLoad;
+use \core\MVC\KernelException;
 /**
  * Autoload de clases
  */
@@ -16,10 +18,11 @@ class AutoLoad {
         $classToLoad = $basedir . ds . $classPath . ".php";
         $className = substr($classNameSpace, strrpos($classNameSpace, "\\") + 1);
         if(!@include_once $classToLoad) {
-            throw new Exception("Can't load $classPath");
+            throw new KernelException("Can't load $classPath <br>");
         }
         if (!class_exists($classNameSpace, false) && !interface_exists($classNameSpace, false)) {
-            throw new Exception('Class ' . $classNameSpace . ' not found');
+          
+            throw new KernelException('Class ' . $classNameSpace . ' not found');
         }
     }
     

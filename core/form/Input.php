@@ -50,7 +50,7 @@ class Input
     static function str($value)
     {
          //    imprimir::frase("Sanitiza String");
-        $value=trim($value); 
+       // $value=trim($value); 
         $value=stripslashes($value);
         return $newstr = filter_var($value, FILTER_SANITIZE_STRING,);
     }

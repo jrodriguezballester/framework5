@@ -18,7 +18,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    private $redirect_to = '/';
+    private $redirect_to = '/mensaje/:mensaje';
 
 
     /**
@@ -27,32 +27,40 @@ class RegisterController extends Controller
      * @return boolean
      */
     public function RegisterAction()
-
     {
-        $error = false;
-        if ($_POST['user'] == null) {
-            $error = true;
-        }
-        if ($_POST['password'] != $_POST['password2']) {
-            echo "contraseñas distintas";
-            $error = true;
-        }
-        if (!$error) {
-            //      imprimir::frase("entra en RegisterAction");
-            $userName = input::str($_POST['user']);
-            $password = auth::crypt(input::str($_POST['password']));
+        //Obteniendo los datos de "formulario"
+        if (isset($_POST['register'])) {
+            $error = false;
+            if ($_POST['user'] == null) {
+                $error = true;
+            }
+            if ($_POST['password'] != $_POST['password2']) {
+                echo "contraseñas distintas";
+                $error = true;
+            }
+            if (!$error) {
+                //      imprimir::frase("entra en RegisterAction");
+                $userName = input::str($_POST['user']);
+                $password = auth::crypt(input::str($_POST['password']));
+                if (input::check(['user', 'password'], $_POST)) {
 
-            if (input::check(['user', 'password'], $_POST)) {
-
-                $idUser = $this->createUser($userName, $password);
-                //          imprimir::linea("idUser", $idUser);
-                if ($idUser > 0) {
-                    $this->uploadAvatar($_FILES['avatar']['name'], $_FILES["avatar"]["tmp_name"], $idUser);
-
-                    header('Location: ' . $GLOBALS['config']['site']['root'] . $this->redirect_to);
-                } else echo 'ALGO HA FALLADO';
-            } else {
-                echo '<br>Usuario o password vacío';
+                    $idUser = $this->createUser($userName, $password);
+                    //          imprimir::linea("idUser", $idUser);
+                    if ($idUser > 0) {
+                        $this->uploadAvatar($_FILES['avatar']['name'], $_FILES["avatar"]["tmp_name"], $userName);
+                        //    $this->user->getAvatarField() = $_FILES['avatar']['name'];
+                        //    $this->user->save();
+                        //  imprimir::imprime("file:", $_FILES["avatar"]["tmp_name"]);
+                        $mensaje = 1;
+                        header('Location: ' . $GLOBALS['config']['site']['root'] . "/mensaje/" . $mensaje);
+                    } else {
+                        $mensaje = 2;
+                        header('Location: ' . $GLOBALS['config']['site']['root'] . "/mensaje/" . $mensaje);
+                    }
+                } else {
+                    $mensaje = 3;
+                    header('Location: ' . $GLOBALS['config']['site']['root'] . "/mensaje/" . $mensaje);
+                }
             }
         }
     }
@@ -66,14 +74,16 @@ class RegisterController extends Controller
      */
     private function createUser($userName, $password)
     {
-        imprimir::frase("crea el usuario");
+    //    imprimir::frase("crea el usuario");
         $user = new UserModel();
         $userNameField = $user->getUserNameField();
         $passwordField = $user->getPasswordField();
-
+        $avatarField = $user->getAvatarField();
+        ///////////  
         $user->$userNameField = $userName;
         $user->$passwordField = $password;
-
+        $user->$avatarField = 'avatar' . $userName . '.' . pathinfo($_FILES['avatar']['name'])['extension'];
+        
         if ($user->save()) {
             //        imprimir::frase("lo ha save__ado");
             return $user->lastInsertId();
@@ -81,20 +91,26 @@ class RegisterController extends Controller
     }
 
     /**
-     * Sube una imagen a la carpeta /public/images/avatares
+     * Guarda la imagen recogida $fileName en /.../avatares
      *
-     * @param string $fileName
-     * @param string $tmpFileName
-     * @return boolean
-     */
-    private function uploadAvatar($fileName, $tmpFileName, $idUser)
+     * @param [type] $fileName
+     * @param [type] $tmpFileName
+     * @param [type] $userName
+     * @return void
+     */ 
+    private function uploadAvatar($fileName, $tmpFileName, $userName)
     {
         //viene de registerAction RegisterControler 43
         if (input::checkImage($fileName)) {
-            $avatar = 'avatar' . $idUser . '.' . pathinfo($fileName)['extension'];
+
+            //  $avatar = 'avatar' . $idUser . '.' . pathinfo($fileName)['extension'];
+            $avatar = 'avatar' . $userName . '.' . pathinfo($fileName)['extension'];
+
             $path = $GLOBALS['basedir'] . ds . 'public' . ds . 'images' . ds . 'avatares' . ds . $avatar;
-            //borrar todos avatar.iduser.*  en $path /////////////////////////////
-            unlink($path . 'avatar' . $idUser);
+           
+          //  imprimir::imprime("tmp", $tmpFileName);
+          //  imprimir::imprime("avatar", $avatar);
+          //  imprimir::imprime("nombre", $userName);
             if (move_uploaded_file($tmpFileName, $path))
                 return true;
             else return false;

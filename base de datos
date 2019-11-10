@@ -1,8 +1,26 @@
-CREATE TABLE `comentarios` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`idusuario` VARCHAR(50) NOT NULL,
-	`idjugador` INT(50) NOT NULL DEFAULT 0,
-	`Comentario` VARCHAR(255) NOT NULL DEFAULT '0',
-	PRIMARY KEY (`id`),
-	CONSTRAINT `FK__jugadores` FOREIGN KEY (`idjugador`) REFERENCES `jugadores` (`codigo`)
-)
+
+
+-- Volcando estructura para tabla nba.comentarios
+CREATE TABLE IF NOT EXISTS `comentarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idJugador` int(11) NOT NULL,
+  `idusuario` varchar(50) NOT NULL DEFAULT '',
+  `Comentario` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `FK__jugadores` (`idJugador`),
+  KEY `FK_comentarios_usuarios` (`idusuario`),
+  CONSTRAINT `FK__jugadores` FOREIGN KEY (`idJugador`) REFERENCES `jugadores` (`codigo`),
+  CONSTRAINT `FK_comentarios_usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+
+
+-- Volcando estructura para tabla nba.usuarios
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `password` varchar(255) NOT NULL DEFAULT '',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) NOT NULL DEFAULT '0',
+  `foto` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `usuario` (`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=latin1;
+

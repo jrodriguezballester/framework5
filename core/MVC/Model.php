@@ -160,8 +160,14 @@ abstract class Model { //implements \ArrayAccess{
     }
 
 
-    
-    public static function find2($campo,$value) {
+    /**
+     * Busca un registro por un campo y una condicion
+     *
+     * @param [type] $campo
+     * @param [type] $value
+     * @return void
+     */
+    public static function BuscarCampoValor($campo,$value) {
         $instance = self::getNewInstance();
         $results = DB::table($instance->getTable())
                                 ->where($campo, '=', $value)
@@ -320,7 +326,7 @@ abstract class Model { //implements \ArrayAccess{
      * @return int
      */
     public function lastInsertId() {
-        imprimir::frase("entra en lastID");
+     //   imprimir::frase("entra en lastID");
         return DB::table($this->getTable())->lastInsertId();
     }
 

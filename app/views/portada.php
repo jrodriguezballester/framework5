@@ -11,6 +11,16 @@
 ?>
 <div id="content">
     <img src="public/images/escudo.jpg" />  
-</div>    
+</div> 
+
+
+<?php
+if ($data){//este código se ejecuta tan solo si se detecta una matriz de datos que e le envia
+  //  $nombre = $_POST['nombre'];//recoge la variable nombre y la guarda para trabajar con ella
+    echo '<br><br><br>hola' . $data;
+ 
+}
+
+?>   
 </body>
 </html>

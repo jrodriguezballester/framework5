@@ -4,7 +4,9 @@ namespace core\database;
 
 use core\MVC\imprimir;
 use PDO;
-use PDOException;
+//use PDOException;
+use core\MVC\KernelException;
+use Exception;
 
 /* clase para conectar con nuestra bbdd */
 
@@ -83,9 +85,19 @@ class PdoConnection
      */
     public function insert($query, $params)
     {
-     //   imprimir::frase("entra inser pdoconection");
-     //   imprimir::imprime("Squery", $query);
-        return $this->execQueryNoResult($query, $params);
+       // imprimir::frase("entra inser pdoconection");
+        
+        try {
+           
+        //    imprimir::frase("sale inser pdoconection");
+            return$this->execQueryNoResult($query, $params);
+        }
+            catch (\PDO $e) {
+       //         imprimir::resalta("pdo error"); 
+                throw new KernelException("Error Processing Request");
+            
+        }
+       
     }
 
     /**
@@ -146,6 +158,18 @@ class PdoConnection
     private function execQueryNoResult($query, $params)
     {
         $ps = $this->bbdd->prepare($query);
-        return $ps->execute($params);
+        try {
+          
+            $A=$ps->execute($params);
+            imprimir::resalta("hola");
+            return $A;
+        } catch (\PDOException $e) {
+          //  imprimir::resalta("pd0 error");
+          //  throw new KernelException("error en base de datos");   
+        } catch (Exception $ex){
+            throw new KernelException("error en base de datos");  
+         //   imprimir::resalta($e);
+        }
+       
     }
 };
